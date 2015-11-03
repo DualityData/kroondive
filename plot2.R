@@ -96,3 +96,23 @@ p + geom_segment(aes(y=0, xend=degrees, yend=V1), color = "salmon", size = bydir
 
 ggsave("polarplot.png")
 
+
+## per person usage 
+data1 = rbind(lighting.byfloor,plug.byfloor)
+data1$perperson = data1$usage/data1$count
+data1 = melt(data1,id.vars=c("floor","type"))
+data1 = data.table(data1)
+
+g1 = ggplot(data1[type=='lighting'],aes(x=as.factor(floor),y=value,fill=as.factor(floor),alpha=0.5))+geom_bar(stat='identity')+facet_wrap(~variable,nrow=4,scales="free")+theme(legend.position='none',strip.text.x = element_text(size=14,face='bold'))+ggtitle('Lighting energy use')
+pdf('lighting.pdf')
+print(g1)
+dev.off()
+
+g2 = ggplot(data1[type=='plug.load'],aes(x=as.factor(floor),y=value,fill=as.factor(floor),alpha=0.5))+geom_bar(stat='identity')+facet_wrap(~variable,nrow=4,scales="free")+theme(legend.position='none',strip.text.x = element_text(size=14,face='bold'))+ggtitle('Plug-load energy use')
+pdf('plug.pdf')
+print(g2)
+dev.off()
+
+#table - occupants per room
+byroom[order(-V1)]
+

@@ -11,6 +11,3 @@ light = all[,c(1,11:15),with=FALSE]
 plug = all[,c(1,16:20),with=FALSE]
 
 temp = all[,c(1,21:22),with=FALSE]
-
-michellehudson.github.io/monstermashup2015
-national ufo reporting center. 
